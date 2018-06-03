@@ -299,7 +299,7 @@
                           <%= f.hidden_field :status, value: Appointment.statuses[:Sold] %>
 
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">SNAP Financing</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Financing</label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
                               <%= f.select :sold_snap, options_for_select({ YES: :YES, NO: :NO }.values, @appointment.sold_snap), {}, { class: 'form-control' } %>
                             </div>
@@ -351,20 +351,6 @@
                               <input type="text" class="form-control has-feedback-left datepicker-delivery" value="<%= @appointment.sold_due_on_delivery.strftime("%m/%d/%Y") %>" required />
                               <% end %>
                               <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
-                            </div>
-                          </div>
-
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Extra</label>
-                            <div class="col-md-9 col-sm-9 col-xs-12">
-                              <%= f.number_field :sold_extra, :class => 'form-control money', :step => "0.01" %>
-                            </div>
-                          </div>
-
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Discount</label>
-                            <div class="col-md-9 col-sm-9 col-xs-12">
-                              <%= f.number_field :sold_discount, :class => 'form-control money', :step => "0.01" %>
                             </div>
                           </div>
 
@@ -428,34 +414,6 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">GRILLS</label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
                               <%= f.select :sold_grills, options_for_select({ YES: :YES, NO: :NO }.values, @appointment.sold_grills), {}, { class: 'form-control grills-select' } %>
-                            </div>
-                          </div>
-
-                          <div class="form-group grills-type-div">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">GRILLS TYPE</label>
-                            <div class="col-md-9 col-sm-9 col-xs-12">
-                              <%= f.select :sold_grills_type, options_for_select({ 'Separate file' => 'Separate file', 'NO' => 'NO' }.values, @appointment.sold_grills_type), {}, { class: 'form-control grills-type-select' } %>
-                            </div>
-                          </div>
-
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Privacy glass</label>
-                            <div class="col-md-9 col-sm-9 col-xs-12">
-                              <%= f.select :sold_privacy_glass, options_for_select({ YES: :YES, NO: :NO }.values, @appointment.sold_privacy_glass), {}, { class: 'form-control privacy-glass-select' } %>
-                            </div>
-                          </div>
-
-                          <div class="form-group privacy-glass-type-div">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Privacy glass type</label>
-                            <div class="col-md-9 col-sm-9 col-xs-12">
-                              <%= f.select :sold_privacy_glass_type, options_for_select({ 'MISSING INFO' => 'MISSING INFO' }.values, @appointment.sold_privacy_glass_type), {}, { class: 'form-control privacy-glass-type-select' } %>
-                            </div>
-                          </div>
-
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Measure Window</label>
-                            <div class="col-md-9 col-sm-9 col-xs-12">
-                              <%= f.select :sold_measure_window, options_for_select({ 'Brick to Brick' => 'Brick to Brick', 'Stud to Stud' => 'Stud to Stud', 'Straight Through' => 'Straight Through', 'Retro Fit' => 'Retro Fit', 'Custom' => 'Custom' }.values, @appointment.sold_measure_window), {}, { class: 'form-control' } %>
                             </div>
                           </div>
 
