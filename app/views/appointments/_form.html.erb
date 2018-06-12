@@ -12,6 +12,8 @@
       <% end %>
 
       <%= f.hidden_field :customer_id, value: appointment.customer_id, id: :customer_id %>
+      <%= f.hidden_field :appointment_id, value: appointment.id, id: :appointment_id %>
+      <%= f.hidden_field :appointment_status, value: appointment.status, id: :appointment_status %>
 
       <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12">Schedule Date</label>
@@ -99,16 +101,16 @@
       <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12">Salesman</label>
           <div class="col-md-9 col-sm-9 col-xs-12">
-            <%= f.select :seller_id, options_for_select(sellers.map{ |c| [c.full_name, c.id] }, appointment.seller_id), {:include_blank => 'None Specified'}, { class: 'form-control' } %>
+            <%= f.select :seller_id, options_for_select(sellers.map{ |c| [c.full_name, c.id] }, appointment.seller_id), {:include_blank => 'None Specified'}, { class: 'form-control', disabled: appointment.status == 'Sold' } %>
           </div>
       </div>
       <% end %>
 
         <% if edit_mode %>
-          <% if current_user.role == 'admin' || current_user.role == 'master' || current_user.role == 'manager' %>
+          <% if ((current_user.role == 'admin' || current_user.role == 'master' || current_user.role == 'manager') && appointment.status == 'Sold') %>
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Installer</label>
-                <div class="col-md-9 col-sm-9 col-xs-12">
+                <div class="col-md-9 col-sm-9 col-xs-12" id="installers-select">
                   <%= f.select :installer_id, options_for_select(@installers.map{ |c| [c.full_name, c.id] }, appointment.installer_id), {:include_blank => 'None Specified'}, { class: 'form-control' } %>
                 </div>
               </div>

@@ -48,9 +48,14 @@ class AppointmentsController < ApplicationController
 
   def bookings
     today = Date.parse(params[:date])
+    appointment = Appointment.find(params[:appointment])
 
-    @bookings = SellerSchedule.bookings_available(today, (today + 1.day))
-    render layout: false, status: 200 
+    if appointment.status == 'Sold'
+      @bookings = InstallerSchedule.bookings_available(today, (today + 1.day))
+    else
+      @bookings = SellerSchedule.bookings_available(today, (today + 1.day))
+    end
+    render layout: false, status: 200
   end
   
 
@@ -221,8 +226,14 @@ class AppointmentsController < ApplicationController
       @appointment.new_customer_last_name = @customer.last_name
       @appointment.new_customer_email = @customer.email
 
-      @bookings = SellerSchedule.bookings_available(Date.parse(@appointment.schedule_time.to_s), Date.parse((@appointment.schedule_time + 1.day).to_s), @appointment)
-    end   
+      if @appointment.status == 'Sold'
+        # Bookings by installer
+        @bookings = InstallerSchedule.bookings_available(Date.parse(@appointment.schedule_time.to_s), Date.parse((@appointment.schedule_time + 1.day).to_s), @appointment)
+      else
+        # Bookings by salesmen
+        @bookings = SellerSchedule.bookings_available(Date.parse(@appointment.schedule_time.to_s), Date.parse((@appointment.schedule_time + 1.day).to_s), @appointment)
+      end
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def appointment_params
