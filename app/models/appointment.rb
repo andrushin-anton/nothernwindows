@@ -10,7 +10,7 @@ class Appointment < ApplicationRecord
     belongs_to :customer
     has_many :attachments
 
-    enum statuses: { Assigned: :Assigned, Lead: :Lead, Reschedule: :Reschedule, UpSell: :UpSell, Referral: :Referral, Cancelled: :Cancelled, Sold: :Sold, FollowUp: :FollowUp, Telemarketing: :Telemarketing }
+    enum statuses: { Assigned: :Assigned, Lead: :Lead, Reschedule: :Reschedule, UpSell: :UpSell, Referral: :Referral, Cancelled: :Cancelled, Sold: :Sold, FollowUp: :FollowUp, Telemarketing: :Telemarketing, Completed: :Completed }
     enum types: { Confirmed: :Confirmed, Unconfirmed: :Unconfirmed }
 
     attr_accessor :new_customer_first_name, :new_customer_last_name, :new_customer_phone, :new_customer_home_phone, :new_customer_email
@@ -205,25 +205,27 @@ class Appointment < ApplicationRecord
     def color
         
         case self.status.to_sym
-        
+
+            when :Completed
+                return 'green'
         when :Lead
-            return '#583030'
+            return 'blue'
         when :Assigned
-            return '#FF902F'
+            return 'orange'
         when :Confirmed
-            return '#FF902F'
+            return 'dark-blue'
         when :Telemarketing
             return '#3A29D2'
         when :Reschedule
-            return '#3A29D2'
+            return 'pink'
         when :UpSell
             return '#d28f3e'
         when :Referral
             return '#d28f3e'
         when :Cancelled
-            return '#EC2D26'
+            return 'purple'
         when :Sold
-            return self.installer_id == nil ? '#4DB02F' : '#66ccff'
+            return self.installer_id == nil ? 'red' : 'yellow'
         when :FollowUp
             return '#B326C9'
         else

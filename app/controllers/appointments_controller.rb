@@ -147,6 +147,12 @@ class AppointmentsController < ApplicationController
   def update
     authorize! :update, @appointment
 
+    if current_user.role == 'installer'
+      if params['installer_marks_as_completed']
+        @appointment.status = 'Completed'
+      end
+    end
+
     if current_user.role == 'seller'
       @appointment.sold_by = current_user.first_name + ' ' + current_user.last_name + ', ' + DateTime.now.to_formatted_s(:db) if params[:appointment][:status] == 'Sold'
     end    
