@@ -6,7 +6,7 @@
 
     <div class="title_right">
     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-      <%= form_tag appointments_path, :method => 'get' do %>
+      <%= form_tag appointments_find_path, :method => 'get' do %>
       <div class="input-group">
           <input type="text" name="search" value="<%= params[:search] %>" class="form-control" placeholder="Search for...">
           <span class="input-group-btn">

@@ -29,6 +29,27 @@ class Appointment < ApplicationRecord
         end
         write_attribute(:seller_id, val.to_i)
     end
+
+    def self.user_search(user, search)
+        if search
+            if user.role == 'admin' || user.role == 'manager' || user.role == 'master'
+                self.joins(:customer).where(
+                    '(address LIKE ? OR city LIKE ? OR customers.first_name LIKE ? OR customers.last_name LIKE ? OR comments LIKE ?)',
+                    "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%"
+                ).order('id DESC').all
+            elsif user.role == 'seller'
+                self.joins(:customer).where(
+                    '(address LIKE ? OR city LIKE ? OR customers.first_name LIKE ? OR customers.last_name LIKE ? OR comments LIKE ?) AND seller_id = ?',
+                    "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", user.id
+                ).order('id DESC').all
+            elsif user.role == 'installer'
+                self.joins(:customer).where(
+                    '(address LIKE ? OR city LIKE ? OR customers.first_name LIKE ? OR customers.last_name LIKE ? OR comments LIKE ?) AND installer_id = ?',
+                    "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", user.id
+                ).order('id DESC').all
+            end
+        end
+    end
     
 
     #Appointments

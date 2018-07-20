@@ -27,7 +27,7 @@ class AppointmentsController < ApplicationController
     else 
       start_time = Time.parse(today.at_beginning_of_week.to_s)
     end
-  
+
     end_time = Time.parse((today.at_end_of_week + 1.day).to_s)
     
     # get appointments
@@ -44,6 +44,11 @@ class AppointmentsController < ApplicationController
       @sellerschedule = SellerSchedule.search_by_date_range(start_time, end_time)
       @installerschedule = InstallerSchedule.search_by_date_range(start_time, end_time)
     end
+  end
+
+  def search
+    # get appointments
+    @appointments = Appointment.user_search(current_user, params[:search])
   end
 
   def bookings
