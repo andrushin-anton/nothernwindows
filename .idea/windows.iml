@@ -22,7 +22,7 @@
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/bundle" />
     </content>
-    <orderEntry type="jdk" jdkName="rbenv: 2.3.1" jdkType="RUBY_SDK" />
+    <orderEntry type="jdk" jdkName="rbenv: 2.4.2" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="access-granted (v1.0.4, rbenv: 2.3.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="actioncable (v5.0.2, rbenv: 2.3.1) [gem]" level="application" />
