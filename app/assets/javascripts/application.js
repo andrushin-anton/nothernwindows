@@ -187,7 +187,7 @@ function processEndTime(value) {
 
 function process_attachments() {
     var attachments_count = parseInt($('#sold-attachments-count').val());
-    var minimum_files = 2;
+    var minimum_files = 1;
 
     if (attachments_count >= minimum_files) {
         $('#submit-sold').attr('disabled', false);

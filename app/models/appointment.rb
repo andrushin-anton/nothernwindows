@@ -228,30 +228,30 @@ class Appointment < ApplicationRecord
         case self.status.to_sym
 
             when :Completed
-                return 'green'
-        when :Lead
-            return 'blue'
-        when :Assigned
-            return 'orange'
-        when :Confirmed
-            return 'dark-blue'
-        when :Telemarketing
-            return '#3A29D2'
-        when :Reschedule
-            return 'pink'
-        when :UpSell
-            return '#d28f3e'
-        when :Referral
-            return '#d28f3e'
-        when :Cancelled
-            return 'purple'
-        when :Sold
-            return self.installer_id == nil ? 'red' : 'yellow'
-        when :FollowUp
-            return '#B326C9'
-        else
-            return '#FFF'
-        end
+                return 'pink'
+            when :Lead
+                return 'gray'
+            when :Assigned
+                return 'orange'
+            when :Confirmed
+                return 'dark-blue'
+            when :Telemarketing
+                return 'yellow'
+            when :Reschedule
+                return '#00008B'
+            when :UpSell
+                return 'black'
+            when :Referral
+                return 'blue'
+            when :Cancelled
+                return 'red'
+            when :Sold
+                return self.installer_id == nil ? 'green' : 'green'
+            when :FollowUp
+                return 'purple'
+            else
+                return '#FFF'
+            end
     end
 
 

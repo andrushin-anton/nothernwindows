@@ -10,10 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170415184407) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20181226135004) do
 
   create_table "appointments", force: :cascade do |t|
     t.string   "status"
@@ -71,11 +68,12 @@ ActiveRecord::Schema.define(version: 20170415184407) do
     t.string   "sold_window_color_outside"
     t.string   "sold_window_color_inside"
     t.string   "sold_by"
-    t.index ["followup_time"], name: "index_appointments_on_followup_time", using: :btree
-    t.index ["installer_id"], name: "index_appointments_on_installer_id", using: :btree
-    t.index ["schedule_time"], name: "index_appointments_on_schedule_time", using: :btree
-    t.index ["seller_id"], name: "index_appointments_on_seller_id", using: :btree
-    t.index ["status"], name: "index_appointments_on_status", using: :btree
+    t.string   "payment_type"
+    t.index ["followup_time"], name: "index_appointments_on_followup_time"
+    t.index ["installer_id"], name: "index_appointments_on_installer_id"
+    t.index ["schedule_time"], name: "index_appointments_on_schedule_time"
+    t.index ["seller_id"], name: "index_appointments_on_seller_id"
+    t.index ["status"], name: "index_appointments_on_status"
   end
 
   create_table "articles", force: :cascade do |t|
@@ -93,7 +91,7 @@ ActiveRecord::Schema.define(version: 20170415184407) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "file_name"
-    t.index ["appointment_id"], name: "index_attachments_on_appointment_id", using: :btree
+    t.index ["appointment_id"], name: "index_attachments_on_appointment_id"
   end
 
   create_table "audits", force: :cascade do |t|
@@ -111,11 +109,11 @@ ActiveRecord::Schema.define(version: 20170415184407) do
     t.string   "remote_address"
     t.string   "request_uuid"
     t.datetime "created_at"
-    t.index ["associated_id", "associated_type"], name: "associated_index", using: :btree
-    t.index ["auditable_id", "auditable_type"], name: "auditable_index", using: :btree
-    t.index ["created_at"], name: "index_audits_on_created_at", using: :btree
-    t.index ["request_uuid"], name: "index_audits_on_request_uuid", using: :btree
-    t.index ["user_id", "user_type"], name: "user_index", using: :btree
+    t.index ["associated_id", "associated_type"], name: "associated_index"
+    t.index ["auditable_id", "auditable_type"], name: "auditable_index"
+    t.index ["created_at"], name: "index_audits_on_created_at"
+    t.index ["request_uuid"], name: "index_audits_on_request_uuid"
+    t.index ["user_id", "user_type"], name: "user_index"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -135,8 +133,8 @@ ActiveRecord::Schema.define(version: 20170415184407) do
     t.integer  "installer_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["installer_id"], name: "index_installer_schedules_on_installer_id", using: :btree
-    t.index ["schedule_time"], name: "index_installer_schedules_on_schedule_time", using: :btree
+    t.index ["installer_id"], name: "index_installer_schedules_on_installer_id"
+    t.index ["schedule_time"], name: "index_installer_schedules_on_schedule_time"
   end
 
   create_table "seller_schedules", force: :cascade do |t|
@@ -144,8 +142,8 @@ ActiveRecord::Schema.define(version: 20170415184407) do
     t.integer  "seller_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["schedule_time"], name: "index_seller_schedules_on_schedule_time", using: :btree
-    t.index ["seller_id"], name: "index_seller_schedules_on_seller_id", using: :btree
+    t.index ["schedule_time"], name: "index_seller_schedules_on_schedule_time"
+    t.index ["seller_id"], name: "index_seller_schedules_on_seller_id"
   end
 
   create_table "statuses", force: :cascade do |t|
@@ -166,8 +164,8 @@ ActiveRecord::Schema.define(version: 20170415184407) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "status"
-    t.index ["role"], name: "index_users_on_role", using: :btree
-    t.index ["status"], name: "index_users_on_status", using: :btree
+    t.index ["role"], name: "index_users_on_role"
+    t.index ["status"], name: "index_users_on_status"
   end
 
 end

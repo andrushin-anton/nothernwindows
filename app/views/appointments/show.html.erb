@@ -323,7 +323,7 @@
                           </div>
 
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Energy Surcharge</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Down payment</label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
                               <%= f.number_field :sold_energy_charge, :class => 'form-control money', :step => "0.01" %>
                             </div>
@@ -337,13 +337,6 @@
                           </div>
 
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Credit Card Charge</label>
-                            <div class="col-md-9 col-sm-9 col-xs-12">
-                              <%= f.number_field :sold_credit_card, :class => 'form-control money', :step => "0.01" %>
-                            </div>
-                          </div>
-
-                          <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Total</label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
                               <%= f.number_field :sold_total, :class => 'form-control money', :step => "0.01", required: 'true' %>
@@ -351,37 +344,16 @@
                           </div>
 
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Due on delivery</label>
-                            <div class="col-md-9 col-sm-9 col-xs-12">
-                              <% if @appointment.sold_due_on_delivery.nil? || @appointment.sold_due_on_delivery == '' %>
-                              <%= f.hidden_field :sold_due_on_delivery, value: Date.today.to_formatted_s(:db), id: 'delivery_corrected_date' %>
-                              <input type="text" class="form-control has-feedback-left datepicker-delivery" value="<%= Date.today.strftime("%m/%d/%Y") %>" required />
-                              <% else %>
-                              <%= f.hidden_field :sold_due_on_delivery, value: @appointment.sold_due_on_delivery.to_formatted_s(:db), id: 'delivery_corrected_date' %>
-                              <input type="text" class="form-control has-feedback-left datepicker-delivery" value="<%= @appointment.sold_due_on_delivery.strftime("%m/%d/%Y") %>" required />
-                              <% end %>
-                              <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
-                            </div>
-                          </div>
-
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Amount of total order on completion</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Amount due upon installation</label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
                               <%= f.number_field :sold_amount_of_total, :class => 'form-control money', :step => "0.01" %>
                             </div>
                           </div>
 
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Delivery Dead Line</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Payment Type</label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
-                              <% if @appointment.sold_delivery_dead_line.nil? || @appointment.sold_delivery_dead_line == '' %>
-                              <%= f.hidden_field :sold_delivery_dead_line, value: Date.today.to_formatted_s(:db), id: 'delivery_dead_line_corrected_date' %>
-                              <input type="text" class="form-control has-feedback-left datepicker-delivery-dead-line" value="<%= Date.today.strftime("%m/%d/%Y") %>" required />
-                              <% else %>
-                              <%= f.hidden_field :sold_delivery_dead_line, value: @appointment.sold_delivery_dead_line.to_formatted_s(:db), id: 'delivery_dead_line_corrected_date' %>
-                              <input type="text" class="form-control has-feedback-left datepicker-delivery-dead-line" value="<%= @appointment.sold_delivery_dead_line.strftime("%m/%d/%Y") %>" required />
-                              <% end %>
-                              <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                              <%= f.select :payment_type, options_for_select({ 'Cheque' => 'Cheque', 'Credit Card' => 'Credit Card' }.values, @appointment.payment_type), {}, { class: 'form-control' } %>
                             </div>
                           </div>
 
