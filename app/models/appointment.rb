@@ -236,7 +236,7 @@ class Appointment < ApplicationRecord
             when :Confirmed
                 return 'dark-blue'
             when :Telemarketing
-                return 'yellow'
+                return '#333'
             when :Reschedule
                 return '#00008B'
             when :UpSell
